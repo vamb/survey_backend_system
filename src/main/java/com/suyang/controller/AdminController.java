@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.suyang.model.Admin;
 import com.suyang.service.AdminService;
-
+   
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
