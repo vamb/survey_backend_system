@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.suyang.dao.QuestionMapper">
+
+	<resultMap id="baseMap" type="com.suyang.model.Question">
+		<result column="id" property="id" jdbcType="BIGINT"/>
+		<result column="sury_id" property="suryId" jdbcType="BIGINT"/>
+		<result column="qust_name" property="qustName" />
+		<result column="qust_type" property="qustType" />
+		<result column="sorting" property="sorting" />
+	</resultMap>
+
+	<select id="getQuestionList" resultMap="baseMap">
+		select * from tbl_question where deleted = 0
+	</select>
+	
+	<select id="getQustById" resultMap="baseMap">
+		select * from tbl_question where id = #{qustId}
+	</select>
+	
+
+</mapper>

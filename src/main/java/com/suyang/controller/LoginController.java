@@ -93,12 +93,12 @@ public class LoginController {
 		//设置发件人
 		mm.setFrom(new InternetAddress("vambzhang@163.com"));
 		//设置收件人
-		mm.setRecipient(Message.RecipientType.TO, new InternetAddress("917532130@qq.com"));
+		mm.setRecipient(Message.RecipientType.TO, new InternetAddress("ilesanmiolade@yahoo.com"));
 		//设置抄送人
 //		mm.setRecipient(Message.RecipientType.CC, new InternetAddress("用户名@163.com"));
 
-		mm.setSubject("第一封JAVA邮件！");
-		mm.setContent("咱们开会把", "text/html;charset=gbk");
+		mm.setSubject("an email by java");
+		mm.setContent("success", "text/html;charset=gbk");
 
 		return mm;
 	}
