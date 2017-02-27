@@ -31,7 +31,7 @@
 			</div>
 		</div>
 		
-		<div class="span6">
+		<div style="width:100%;">
 		
 			<div class="portlet box green">
 				<div class="portlet-title">
@@ -46,37 +46,43 @@
 						<a class="remove" href="javascript:;"></a>
 					</div>
 				</div>
-			<div class="portlet-body" style="display: block;">
-				<table class="table table-striped table-hover">
-					<thead>
-						<tr>
-							<th>Id</th>
-							<th>SurveyName</th>
-							<th>Sorting</th>
-							<th>Deleted</th>
-							<th>Option</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach var="sury" items="${list}">
-							<tr>
-								<td>${sury.id }</td>
-								<td>${sury.suryName }</td>
-								<td>${sury.sorting }</td>
-								<td>${sury.deleted eq 0?'Normal':'Deleted' }</td>
-								<td>
-									<span><a class="tableModify" attrId="${sury.id }" onclick="modifyAction(this)" href="javascript:void(0)">modify</a></span>
-									<span>|</span>
-									<span><a class="tableDelete" attrId="${sury.id }" onclick="deleteAction(this)" href="javascript:void(0)">delete</a></span>
-								</td>
+				
+				<div class="portlet-body" style="display: block;">
+					<table class="table table-striped table-hover">
+						<thead>
+							<tr style="width:100%;">
+								<th style="width:5%">Num</th>
+								<th style="width:20%;">Id</th>
+								<th style="width:20%;">SurveyName</th>
+								<th style="width:10%;">Sorting</th>
+								<th style="width:15%;">Deleted</th>
+								<th style="width:30%;">Option</th>
 							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
-				<form id="hiddenForm" action="" method="post">
-					<input type="hidden" id="hiddenId" name="id" value="" />
-				</form>
-			</div>
+						</thead>
+						<tbody>
+							<c:forEach var="sury" items="${list}" varStatus="index">
+								<tr style="width:100%;">
+									<td style="width:5%;">${index.count }</td>
+									<td style="width:20%;">${sury.id }</td>
+									<td style="width:20%;">${sury.suryName }</td>
+									<td style="width:10%;">${sury.sorting }</td>
+									<td style="width:15%;">${sury.deleted eq 0?'Normal':'Deleted' }</td>
+									<td style="width:30%;">
+										<span><a class="tableModify" attrId="${sury.id }" onclick="modifyAction(this)" href="javascript:void(0)">modify</a></span>
+										<span>|</span>
+										<span><a class="tableDelete" attrId="${sury.id }" onclick="deleteAction(this)" href="javascript:void(0)">delete</a></span>
+										<span>|</span>
+										<span><a class="tableAddQuestion" attrId="${sury.id }" onclick="addQuestAction(this)" href="javascript:void(0)">add Question</a></span>
+									</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+					<form id="hiddenForm" action="" method="post">
+						<input type="hidden" id="hiddenId" name="id" value="" />
+					</form>
+				</div>
+				
 			</div>
 		</div>
 		<script type="text/javascript">
@@ -112,6 +118,10 @@
 				$("#hiddenId").val($(obj).attr("attrId"));
 				$("#hiddenForm").attr("action","${rc.contextPath}/survey/deleteSurvey");
 				$("#hiddenForm").submit();
+			}
+			
+			function addQuestAction(obj){
+				alert($(obj).attr("attrId"));
 			}
 			
 		</script>

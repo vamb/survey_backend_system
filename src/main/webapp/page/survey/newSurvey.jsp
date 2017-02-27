@@ -133,18 +133,18 @@
 				if((typeof $(obj).attr("checked") != "undifined") && ($(obj).attr("checked") == "checked")){
 					if($(obj).attr("id") == "normal"){
 						$("#deleted").removeAttr("checked");
-						$("#hiddenDeleted").val(1);
+						$("#hiddenDeleted").val(0);
 					}else{
 						$("#normal").removeAttr("checked");
-						$("#hiddenDeleted").val(0);
+						$("#hiddenDeleted").val(1);
 					}
 				}else{
 					if($(obj).attr("id") == "normal"){
 						$("#deleted").attr("checked","checked");
-						$("#hiddenDeleted").val(0);
+						$("#hiddenDeleted").val(1);
 					}else{
 						$("#normal").attr("checked","checked");
-						$("#hiddenDeleted").val(1);
+						$("#hiddenDeleted").val(0);
 					}
 				}
 			}
