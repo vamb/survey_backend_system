@@ -63,11 +63,11 @@
 								<td>${sury.id }</td>
 								<td>${sury.suryName }</td>
 								<td>${sury.sorting }</td>
-								<td>${sury.deleted }</td>
+								<td>${sury.deleted eq 0?'Normal':'Deleted' }</td>
 								<td>
-									<span><a class="tableModify" attrId="${sury.id }" href="javascript:void(0)">modify</a></span>
+									<span><a class="tableModify" attrId="${sury.id }" onclick="modifyAction(this)" href="javascript:void(0)">modify</a></span>
 									<span>|</span>
-									<span><a class="tableDelete" attrId="${sury.id }" href="javascript:void(0)">delete</a></span>
+									<span><a class="tableDelete" attrId="${sury.id }" onclick="deleteAction(this)" href="javascript:void(0)">delete</a></span>
 								</td>
 							</tr>
 						</c:forEach>
@@ -83,7 +83,7 @@
 			$(document).ready(function(){
 				
 			});
-			
+		/* 	
 			$(".tableModify").click(function(){
 				$("#hiddenId").val($(this).attr("attrId"));
 				$("#hiddenForm").attr("action","${rc.contextPath}/article/editArticle");
@@ -94,11 +94,23 @@
 				$("#hiddenId").val($(this).attr("attrId"));
 				$("#hiddenForm").attr("action","${rc.contextPath}/article/deleteAuth");
 				$("#hiddenForm").submit();
-			});
+			}); */
 			
 			function newSurvey(){
 				$("#hiddenId").val("");
 				$("#hiddenForm").attr("action","${rc.contextPath}/survey/newSurvey");
+				$("#hiddenForm").submit();
+			}
+			
+			function modifyAction(obj){
+				$("#hiddenId").val($(obj).attr("attrId"));
+				$("#hiddenForm").attr("action","${rc.contextPath}/survey/detailSurvey");
+				$("#hiddenForm").submit();
+			}
+			
+			function deleteAction(obj){
+				$("#hiddenId").val($(obj).attr("attrId"));
+				$("#hiddenForm").attr("action","${rc.contextPath}/survey/deleteSurvey");
 				$("#hiddenForm").submit();
 			}
 			

@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -94,12 +96,27 @@ public class SurveyService {
 		return surveyMapper.getSurveyList();
 	}
 
+	@Transactional
 	public void updateSurvey(Survey survey) {
 		surveyMapper.updateSurvey(survey);
 	}
 
+	@Transactional
 	public void insertSurvey(Survey survey) {
 		survey.setId(IDGenerator.generateId());
 		surveyMapper.addSurvey(survey);
+	}
+
+	public Integer getMaxSorting() {
+		return surveyMapper.getMaxSorting();
+	}
+	
+	public boolean checkSurveyNameUnique(Survey survey){
+		return surveyMapper.checkSurveyNameUnique(survey);
+	}
+
+	@Transactional
+	public void deleteSurvey(Long id) {
+		surveyMapper.deleteSurvey(id);
 	}
 }

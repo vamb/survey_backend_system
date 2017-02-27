@@ -41,12 +41,18 @@
 			<i class="icon-angle-right"></i>
 		</li>
 		<li>
-			<a href="${rc.contextPath }/survey/newSurvey">new Survey</a>
+			<c:if test="${survey.id eq null}">
+				<a href="${rc.contextPath }/survey/newSurvey">new Survey</a>
+			</c:if>
+			<c:if test="${survey.id ne null}">
+				<a style="cursor:pointer;" onclick="resetAction()">edit Survey</a>
+			</c:if>
 		</li>
 	</ul>
 	
 	<div style="width:100%;margin-top:30px;height:80px;border-bottom:1px solid #eaeaea;">
 		<form action="" id="actionForm" method="post">
+			<input type="hidden" id="hiddenId" name="id" value="${survey.id }" />
 			<div style="width:70%;height:80px;">
 				<div style="width:30%;float:left;height:80px;">
 					<div style="height:80px;width:100px;float:right;margin-right:40px;">
@@ -55,11 +61,11 @@
 				</div>
 				<div style="width:70%;float:left;height:80px">
 					<div style="height:80px;float:left;margin-left:10px;width:100%;line-height:80px;">
-						<input type="text" name="suryName" class="round_cycle" style="line-height:80px;width:250px;"/>
+						<input type="text" name="suryName" value="${survey.suryName }" class="round_cycle" style="line-height:80px;width:250px;"/>
 					</div>
 				</div>
 				<div style="clear:both;"></div>
-			</div>
+			</div>  
 			
 			<div style="width:70%;height:80px;border-bottom:1px solid #eaeaea;">
 				<div style="width:30%;float:left;height:80px;">
@@ -69,7 +75,7 @@
 				</div>
 				<div style="width:70%;float:left;height:80px">
 					<div style="height:80px;float:left;margin-left:10px;width:100%;line-height:80px;">
-						<input type="number" name="suryName" class="round_cycle" style="line-height:80px;width:250px;"/>
+						<input type="number" name="sorting" value="${survey.sorting }" class="round_cycle" style="line-height:80px;width:250px;"/>
 					</div>
 				</div>
 				<div style="clear:both;"></div>
@@ -83,7 +89,8 @@
 				</div>
 				<div style="width:70%;float:left;height:80px">
 					<div style="height:80px;float:left;margin-left:10px;width:100%;line-height:80px;">
-						<input type="hidden" id="hiddenDeleted" name="deleted" value="true" class="round_cycle" style="line-height:80px;width:250px;"/>
+						<input type="hidden" id="hiddenDeleted" name="deleted" 
+							value="${survey.deleted }" class="round_cycle" style="line-height:80px;width:250px;"/>
 						
 						<div style="line-height:80px;float:left;margin-right:20px;">
 							<input type="checkbox" class="options" onclick="optionClick(this)" checked
@@ -121,41 +128,45 @@
 	</div>
 
 	<script type="text/javascript">
-			$(document).ready(function(){
-				
-			});
 			
 			function optionClick(obj){
 				if((typeof $(obj).attr("checked") != "undifined") && ($(obj).attr("checked") == "checked")){
 					if($(obj).attr("id") == "normal"){
 						$("#deleted").removeAttr("checked");
-						$("#hiddenDeleted").val(true);
+						$("#hiddenDeleted").val(1);
 					}else{
 						$("#normal").removeAttr("checked");
-						$("#hiddenDeleted").val(false);
+						$("#hiddenDeleted").val(0);
 					}
 				}else{
 					if($(obj).attr("id") == "normal"){
 						$("#deleted").attr("checked","checked");
-						$("#hiddenDeleted").val(false);
+						$("#hiddenDeleted").val(0);
 					}else{
 						$("#normal").attr("checked","checked");
-						$("#hiddenDeleted").val(true);
+						$("#hiddenDeleted").val(1);
 					}
 				}
 			}
 			
 			function submitAction(){
-				
+				$("#actionForm").attr("action","${rc.contextPath}/survey/saveSurvey");
+				$("#actionForm").submit();
 			}
 			
 			function cancelAction(){
-				alert("cancel");
+				$("#actionForm").attr("action","${rc.contextPath}/survey/listSurveys");
+				$("#actionForm").submit();
 			}
 			
 			function resetAction(){
-				$("#actionForm").attr("action","${rc.contextPath}/survey/newSurvey");
-				$("#actionForm").submit();
+				if($("#newSurvey").val() != ''){
+					$("#actionForm").attr("action","${rc.contextPath}/survey/detailSurvey");
+					$("#actionForm").submit();
+				}else{
+					$("#actionForm").attr("action","${rc.contextPath}/survey/newSurvey");
+					$("#actionForm").submit();
+				}
 			}
 			
 		</script>

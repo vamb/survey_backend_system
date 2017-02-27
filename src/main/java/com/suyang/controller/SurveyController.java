@@ -26,30 +26,62 @@ public class SurveyController {
 		return "/page/survey/listSurveys";
 	}
 	
+	@RequestMapping(value= "/detailSurvey")
+	public String detailSurvey(Model model, Survey survey){
+		survey = surveyService.getSurveyById(survey.getId());
+		model.addAttribute("survey", survey);
+		return "/page/survey/newSurvey";
+	}
+	
 	@RequestMapping(value = "/saveSurvey")
-	public String editArticle(Model model, Survey survey){
+	public String saveSurvey(Model model, Survey survey){
+		if(surveyService.checkSurveyNameUnique(survey)){
+			model.addAttribute("survey",survey);
+			model.addAttribute("msg", "survey name already exist");
+			return "/page/survey/newSurvey";
+		}
 		if(survey!=null && !StringUtils.isEmpty(survey.getId())){
-//			survey = surveyService.getSurveyById(survey.getId());
-//			model.addAttribute("article", article);
 			surveyService.updateSurvey(survey);
+			List<Survey> list = surveyService.getSurveysByMybatis();
+			model.addAttribute("list",list);
+			return "/page/survey/listSurveys";
 		}else{
 			surveyService.insertSurvey(survey);
+			Integer sorting = surveyService.getMaxSorting();
+			if(sorting == null){
+				sorting = 0;
+			}else{
+				sorting += 1;
+			}
+			survey = new Survey();
+			survey.setSorting(sorting);
+			model.addAttribute("survey",survey);
+			return "/page/survey/newSurvey";
 		}
-		return "/page/survey/listSurveys";
+		
 	}
 	
 	@RequestMapping(value = "/newSurvey")
 	public String newSurvey(Model model){
+		Integer sorting = surveyService.getMaxSorting();
+		if(sorting == null){
+			sorting = 0;
+		}else{
+			sorting += 1;
+		}
+		Survey survey = new Survey();
+		survey.setSorting(sorting);
+		model.addAttribute("survey",survey);
 		return "/page/survey/newSurvey";
 	}
-//	
-//	@RequestMapping(value = "/delete")
-//	public String deleteArticle(Model model, Article article){
-//		articleService.deleteArticle(article.getId());
-//		List<Article> list = articleService.getAtriclesByMybatis();
-//		model.addAttribute("list",list);
-//		return "/page/article/listArticles";
-//	}
+	
+	@RequestMapping(value = "/deleteSurvey")
+	public String deleteSurvey(Model model, Survey survey){
+		surveyService.deleteSurvey(survey.getId());
+		List<Survey> list = surveyService.getSurveysByMybatis();
+		model.addAttribute("list",list);
+		return "/page/survey/listSurveys";
+	}
 	public static void main(String[] args){
 		StringBuilder sb1 = new StringBuilder("testString");
 	}

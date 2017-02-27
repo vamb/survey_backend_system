@@ -18,4 +18,10 @@ public interface SurveyMapper {
 	public void updateSurvey(Survey survey);
 	
 	public BeanSurvey getBeanSurveyById(@Param("suryId")Long suryId);
+
+	public Integer getMaxSorting();
+	
+	public boolean checkSurveyNameUnique(Survey survey);
+
+	public void deleteSurvey(@Param("surveyId")Long surveyId);
 }

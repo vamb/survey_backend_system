@@ -17,6 +17,17 @@
 		select * from tbl_survey where id = #{suryId}
 	</select>
 	
+	<select id="getMaxSorting" resultType="java.lang.Integer">
+		select max(sorting) from tbl_survey where deleted != 1
+	</select>
+	
+	<select id="checkSurveyNameUnique" resultType="java.lang.Boolean" parameterType="com.suyang.model.Survey">
+		select count(1) from tbl_survey where sury_name = #{suryName}
+		<if test="id != null" >
+			and id != #{id}
+		</if>
+	</select>
+	
 	<insert id="addSurvey">
 		INSERT INTO tbl_survey (
 			id,
@@ -30,6 +41,10 @@
 			#{deleted}
 		)
 	</insert>
+	
+	<update id="deleteSurvey" parameterType="java.lang.Long" >
+		update tbl_survey set deleted = 1 where id = #{surveyId}
+	</update>
 	
 	<update id="updateSurvey" parameterType="com.suyang.model.Survey" >
 		update tbl_survey

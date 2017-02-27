@@ -14,6 +14,9 @@
 		body{
 			font-family:Microsoft YaHei;
 		}
+		.page-content{
+			/* min-height:500px !important;   */
+		}
 	</style>
 </head>
 <body class="page-header-fixed">
@@ -27,7 +30,7 @@
 
 		<jsp:include page="core-plugin.jsp"/>
 
-		<div class="page-content">
+		<div class="page-content" >
 			<div class="container-fluid">
 				<sitemesh:write property='body'/>
 			</div>
