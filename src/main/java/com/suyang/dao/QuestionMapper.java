@@ -11,4 +11,11 @@ public interface QuestionMapper {
 	public List<Question> getQuestionList();
 	
 	public Question getQustById(@Param("qustId")Long qustId);
+
+	public List<Question> getQuestionListByServeyId(@Param("surveyId")Long surveyId);
+
+	public void updateQuestion(Question question);
+
+	public void insertQuestion(Question question);
+
 }

@@ -121,7 +121,9 @@
 			}
 			
 			function addQuestAction(obj){
-				alert($(obj).attr("attrId"));
+				$("#hiddenId").val($(obj).attr("attrId"));
+				$("#hiddenForm").attr("action","${rc.contextPath}/question/listQuesitons");
+				$("#hiddenForm").submit();
 			}
 			
 		</script>
