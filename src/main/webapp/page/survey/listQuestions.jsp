@@ -5,7 +5,7 @@
 <html>
 
 	<head>
-		<title>listArticles</title>
+		<title>listQuesitons</title>
 	</head>
 	<meta name="menu" content="listSurveys"/>
 	
@@ -25,7 +25,7 @@
 				<i class="icon-angle-right"></i>
 			</li>
 			<li>
-				<a href="javascript:void(0)" onclick="listQuestion()">Survey Question</a>
+				<a href="javascript:void(0)" onclick="listQuestion()">Survey Questions</a>
 			</li>
 		</ul>
 		
@@ -86,7 +86,7 @@
 										<span>|</span>
 										<span><a class="tableDelete" attrId="${qust.id }" onclick="deleteAction(this)" href="javascript:void(0)">delete</a></span>
 										<span>|</span>
-										<span><a class="tableAddOption" attrId="${qust.id }" onclick="addOptionAction(this)" href="javascript:void(0)">add Question</a></span>
+										<span><a class="tableAddOption" attrId="${qust.id }" onclick="addOptionAction(this)" href="javascript:void(0)">add Option</a></span>
 									</td>
 								</tr>
 							</c:forEach>
@@ -165,7 +165,9 @@
 			}
 			
 			function addOptionAction(obj){
-				alert($(obj).attr("attrId"));
+				$("#hiddenId").val($(obj).attr("attrId"));
+				$("#hiddenForm").attr("action","${rc.contextPath}/option/listOptions");
+				$("#hiddenForm").submit();
 			}
 			
 			function listQuestion(){

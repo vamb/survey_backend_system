@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.suyang.model.Option;
 import com.suyang.model.Question;
 
 public interface QuestionMapper {

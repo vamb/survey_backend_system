@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.suyang.model.Question;
 import com.suyang.model.Survey;
@@ -25,7 +24,7 @@ public class QuestionController {
 	public SurveyService surveyService;
 	
 	@RequestMapping(value="/listQuesitons")
-	public String listQuesitons(Model model, Survey survey, RedirectAttributes attr){
+	public String listQuesitons(Model model, Survey survey){
 		survey = surveyService.getSurveyById(survey.getId());
 		List<Question> questions = questionService.getQuestionListByServeyId(survey.getId());
 		model.addAttribute("survey", survey);
@@ -34,7 +33,7 @@ public class QuestionController {
 	}
 	
 	@RequestMapping(value="/saveQuestion")
-	public String saveQuestion(Model model, Question question, RedirectAttributes attr){
+	public String saveQuestion(Model model, Question question){
 		if(question.getId() != null){
 			questionService.updateQuestion(question);
 		}else{
@@ -44,7 +43,7 @@ public class QuestionController {
 		List<Question> questions = questionService.getQuestionListByServeyId(survey.getId());
 		model.addAttribute("survey", survey);
 		model.addAttribute("questions", questions);
-		return "redirect:/question/listQuesitons";
+		return "/page/survey/listQuestions";
 	}
 	
 	@RequestMapping(value="/deleteQuesiton")

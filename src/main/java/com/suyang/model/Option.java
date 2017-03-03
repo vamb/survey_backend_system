@@ -46,11 +46,7 @@ public class Option extends BaseBean{
 	}
 
 	public void setSorting(Integer sorting) {
-		if(sorting != null){
-			this.sorting = sorting;
-		}else{
-			this.sorting = Constant.NOT_DELETED;
-		}
+		this.sorting = sorting;
 	}
 
 	public Integer getDeleted() {

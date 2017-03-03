@@ -18,5 +18,46 @@
 		select * from tbl_option where id = #{optnId}
 	</select>
 	
-
+	<select id="getOptionsByQustId" resultMap="baseMap">
+		select * from tbl_option where qust_id = #{qustId} and deleted != 1 order by sorting
+	</select>
+	
+	<select id="getMaxSortingofThisQust" resultType="java.lang.Integer">
+		select max(sorting) from tbl_option where deleted != 1 and qust_id = #{qustId}
+	</select>
+	
+	<insert id="insertOption">
+		INSERT INTO tbl_option (
+			id,
+			qust_id,
+			optn_name,
+			sorting,
+			deleted
+		)values(
+			#{id},
+			#{qustId},
+			#{optnName},
+			#{sorting},
+			#{deleted}
+		)
+	</insert>
+	
+	<update id="updateOption" parameterType="com.suyang.model.Option" >
+		update tbl_option
+		<set >
+				optn_name = #{optnName},
+			<if test="sorting != null" >
+				sorting = #{sorting},
+			</if>
+			<if test="deleted != null" >
+				deleted = #{deleted},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<update id="deleteoptionById" parameterType="com.suyang.model.Option" >
+		update tbl_option set deleted = 1 where id = #{optnId}
+	</update>
+	
 </mapper>
