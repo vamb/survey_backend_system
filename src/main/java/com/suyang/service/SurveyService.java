@@ -7,8 +7,10 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.suyang.bean.BeanSurvey;
 import com.suyang.dao.SurveyMapper;
 import com.suyang.model.Survey;
+
 import utils.IDGenerator;
 
 @Service
@@ -47,5 +49,9 @@ public class SurveyService {
 	@Transactional
 	public void deleteSurvey(Long id) {
 		surveyMapper.deleteSurvey(id);
+	}
+
+	public BeanSurvey getBeanSurveyById(Long surveyId) {
+		return surveyMapper.getBeanSurveyById(surveyId);
 	}
 }
