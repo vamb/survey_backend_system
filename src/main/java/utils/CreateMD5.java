@@ -45,7 +45,11 @@ public class CreateMD5 {
       
     public static void main(String[] args) {      
         //测试      
-        System.out.println(CreateMD5.getMd5("hello",1L));  
+        System.out.println(CreateMD5.getMd5("hello",1L));
+        
+        System.out.println(CreateMD5.getMd5("1111111111",1L));
+        
+        System.out.println(CreateMD5.getMd5("1111111111",2L));
     }  
   
 }  

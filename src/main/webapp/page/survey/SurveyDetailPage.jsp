@@ -29,18 +29,32 @@
 	<meta name="menu" content="listSurveys"/>
 	
 	<body>
-		<h3 class="page-title" style="height:50px;padding-left:10px;">
-			调查问卷列表
-		</h3>
-		
-		
-		<div>
-			<c:forEach var="sury" items="${list}" varStatus="index">
-				<div style="width:100%;margin-top:10px;padding-left:20px;">
-					<div style="width:100%;cursor:pointer;" onclick="surveyChooseAction(this)" attrName="${sury.suryName }">${sury.suryName }</div>
+		<div style=:width:1330px;margin:0 auto;>
+			<div style="width:960px; margin:0 auto;">
+				<div style="width:960px; margin:0 auto;float:left;text-align:center;">
+					<h3 class="page-title" style="height:50px;padding-left:10px;">
+						Survey Page
+					</h3>
 				</div>
-			</c:forEach>
+				
+				<div style="width:960px; margin:0 auto;float:left;">
+					
+					<c:forEach var="qust" items="${beanSurvey.questions }" varStatus="index">
+							<div style="width:100%;margin-top:10px;padding-left:20px;">
+								${qust.qustName }
+							</div>
+							<div style="width:100%;margin-top:10px;padding-left:20px;">
+								
+							</div>
+					</c:forEach>
+					
+				</div>
+				<div style=:clean:both;></div>
+			</div>
 		</div>
+		
+		
+		
 		<script type="text/javascript">
 			
 			function surveyChooseAction(obj){

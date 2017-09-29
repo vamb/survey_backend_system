@@ -118,7 +118,7 @@
 			from tbl_question
 			where deleted = 0
 		) qust
-		on sury.id = qust.id
+		on sury.id = qust.sury_id
 		left join(
 			select
 				id,
@@ -128,7 +128,7 @@
 			from tbl_option
 			where deleted = 0
 		)optn
-		on qust.id = optn.id
+		on qust.id = optn.qust_id
 	</select>
 
 </mapper>

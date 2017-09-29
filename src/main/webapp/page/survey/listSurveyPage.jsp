@@ -27,34 +27,45 @@
 		<title>listArticles</title>
 	</head>
 	<meta name="menu" content="listSurveys"/>
-	
+	 
 	<body>
-		<h3 class="page-title" style="height:50px;padding-left:10px;">
-			调查问卷列表
-		</h3>
-		
-		
-		<div>
-			<c:forEach var="sury" items="${list}" varStatus="index">   
-				<div style="width:100%;margin-top:10px;padding-left:20px;"> 
-					<div style="width:100%;cursor:pointer;" onclick="surveyChooseAction(this)" attrId="${sury.id }">${sury.suryName }</div>
+		<div style="width:1330px;font-family:'Microsoft YaHei';"> 
+			<div style="width:716px; margin:0 auto;height:800px;
+				background-image:url(${rc.contextPath}/pages/media/image/bg_pic/wine_cup.jpg);">
+			
+				<div style="margin:0 auto;text-align:center;float:left;width:716px;">
+					<h3 class="page-title" style="height:50px;padding-left:10px;font-size:1.5rem;">
+						Survey List Page
+					</h3>
 				</div>
-			</c:forEach>
+				
+				<div style="margin:0 auto;font-size:1rem;color:black;float:left;">
+					<c:forEach var="sury" items="${list}" varStatus="index">   
+						<div style="width:100%;margin-top:10px;padding-left:20px;"> 
+							<div style="width:100%;cursor:pointer;">
+								<span onclick="surveyChooseAction(this)" attrId="${sury.id }" style="text-decoration: underline;">
+									Choose this survey:《 ${sury.suryName } 》
+								</span>
+								<br/>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
+				
+				<form id="hiddenForm" action="" >
+					<input type="hidden" id="hiddenId" name="id" value="" />
+				</form>
+			
+			</div>
 		</div>
-		
-		<form id="hiddenForm" action="" >
-			<input type="hidden" id="hiddenId" name="id" value="" />
-		</form>
-		<script type="text/javascript">
-			
-			function surveyChooseAction(obj){
-				$("#hiddenId").val($(obj).attr("attrId"));
-				$("#hiddenForm").attr("action","${rc.contextPath}/surveyShow/SurveyDetailPage");
-				$("#hiddenForm").submit();
-			}
-			
-		</script>
-	
 	</body>
-	
+		<script type="text/javascript">
+					
+					function surveyChooseAction(obj){
+						$("#hiddenId").val($(obj).attr("attrId"));
+						$("#hiddenForm").attr("action","${rc.contextPath}/surveyShow/SurveyDetailPage");
+						$("#hiddenForm").submit();
+					}
+					
+				</script>
 </html>
